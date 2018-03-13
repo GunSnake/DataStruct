@@ -6,7 +6,7 @@
  * Time: 下午11:29
  */
 
-class autoload
+class autoLoadClass
 {
     static function autoload($class){
         require __DIR__ .'/'. str_replace('\\', '/', $class).'.php';

@@ -26,7 +26,7 @@ class LinkList
 
     public function __construct()
     {
-        $this->head = new Node('null','null');
+        $this->head = new Node(null,null);
     }
 
     /**
@@ -35,10 +35,12 @@ class LinkList
     public function getSize()
     {
         $node = $this->head;
-        while($node->getNext() !== 'null'){
-            $this->size++;
+        $size = 0;
+        while($node->getNext() !== null){
+            $size++;
+            $node = $node->getNext();
         }
-        return $this->size;
+        return $size;
     }
 
     /**
@@ -60,7 +62,7 @@ class LinkList
         while($node->getNext() !== null){
             $node = $node->getNext();
         }
-        $node->setNext(new Node($data, 'null'));
+        $node->setNext(new Node($data, null));
     }
 
     /**
@@ -89,10 +91,9 @@ class LinkList
         if ($this->getSize() <= 0) return 'err';
         $node = $this->head;
         while ($node->getNext() !== null){
-            if ($data === $node->getData()) break;
+            if ($data === $node->getNext()->getData()) break;
             $node = $node->getNext();
         }
-
         $node->setNext($node->getNext()->getNext());
     }
 
@@ -102,10 +103,10 @@ class LinkList
      * @param int $i
      * @return string
      */
-    public function InsertNode($data, int $i)
+    public function InsertNode($data,int $i)
     {
         if ($this->getSize() <= 0) return 'err';
-        if ($this->getSize() < $i) return 'beyond maxsize';
+        if ($this->getSize() < $i - 1) return 'beyond maxsize';
         $node = $this->head;
         $j = 0;
         while ($node->getNext() !== null){
@@ -113,7 +114,7 @@ class LinkList
             $node = $node->getNext();
             $j++;
         }
-        $node->setNext(new Node($data, $node->getNext()->getNext()));
+        $node->setNext(new Node($data, $node->getNext()));
     }
 
     /**
@@ -126,7 +127,7 @@ class LinkList
         $node = $this->head;
         while ($node->getNext() !== null){
             $_node = $node->getNext()->getNext();
-            $node->setNext('null');
+            $node->setNext(null);
             $node = $_node;
         }
     }
