@@ -126,9 +126,30 @@ class LinkList
         if ($this->getSize() <= 0) return 'already empty!';
         $node = $this->head;
         while ($node->getNext() !== null){
-            $_node = $node->getNext()->getNext();
+            $_node = $node->getNext();
             $node->setNext(null);
             $node = $_node;
         }
+    }
+
+    public function getLink()
+    {
+        return $this->head;
+    }
+
+    public function RevertList()
+    {
+        if ($this->getSize() <= 1) return $this->head;
+        $node = $this->head->getNext();
+        $newLink = new Node(null, null);
+        while($node->getNext() !== null){
+            $_node = $node->getNext();
+            $node->setNext($newLink->getNext());
+            $newLink->setNext($node);
+            $node = $_node;
+        }
+        $node->setNext($newLink->getNext());
+        $newLink->setNext($node);
+        return $newLink;
     }
 }
