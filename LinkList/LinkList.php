@@ -181,11 +181,16 @@ class LinkList
     }
 
     /**
-     * 递归法
+     * 迭代法实现链表倒置
      * @return Node
      */
-    public function RevertList2()
+    public function RevertList2($linklist)
     {
-        if ($this->getSize() <= 1) return $this->head;
+        if ($linklist == null || $linklist->getNext() == null) return $linklist;
+
+        $link = $this->RevertList2($linklist->getNext());
+        $linklist->getNext()->setNext($linklist);
+        $linklist->setNext(null);
+        return $link;
     }
 }

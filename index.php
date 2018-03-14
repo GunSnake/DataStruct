@@ -32,5 +32,8 @@ for ($i = 1;$i<=10;$i++){
 //$newLink = $link_list->RevertList();
 //var_dump($newLink);
 
-$newLink = $link_list->RevertList1();
+//$newLink = $link_list->RevertList1();
+//var_dump($newLink);
+
+$newLink = $link_list->RevertList2($link_list->getLink());
 var_dump($newLink);
