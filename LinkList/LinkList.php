@@ -132,24 +132,60 @@ class LinkList
         }
     }
 
+    /**
+     * 获取链表
+     * @return Node
+     */
     public function getLink()
     {
         return $this->head;
     }
 
+    /**
+     * 链表倒置[就地逆置]
+     * @return Node
+     */
     public function RevertList()
     {
         if ($this->getSize() <= 1) return $this->head;
         $node = $this->head->getNext();
-        $newLink = new Node(null, null);
-        while($node->getNext() !== null){
+        $newLink = new Node(null,null);
+        while($node !== null){
             $_node = $node->getNext();
-            $node->setNext($newLink->getNext());
-            $newLink->setNext($node);
+            $node->setNext($newLink);
+            $newLink = $node;
             $node = $_node;
         }
-        $node->setNext($newLink->getNext());
-        $newLink->setNext($node);
         return $newLink;
+    }
+
+    /**
+     * 链表倒置[头插法]
+     * @return Node
+     */
+    public function RevertList1()
+    {
+        if ($this->getSize() <= 1) return $this->head;
+        $link = $this->head;
+        $node = $this->head->getNext();
+        while($node->getNext() !== null){
+            $_node = $node->getNext();
+            $node->setNext($_node->getNext());
+            $_node->setNext($link->getNext());
+            $link->setNext($_node);
+        }
+        $node->setNext($link);
+        $link = $node->getNext()->getNext();//变更旧head到新head上
+        $node->getNext()->setNext(null);
+        return $link;
+    }
+
+    /**
+     * 递归法
+     * @return Node
+     */
+    public function RevertList2()
+    {
+        if ($this->getSize() <= 1) return $this->head;
     }
 }
